@@ -9,9 +9,9 @@ const Cart = ({ cart }) => {
     <div className="cart-container">
       <h4>Order Summary</h4>
       <p>Total Items in Cart: {cart.length}</p>
-      <p>Total Price: ${totalPrice} </p>
-      <p>Total Shipping: ${totalShipping}</p>
-      <p>Grand Total: ${grandTotal}</p>
+      <p>Total Price: ${totalPrice.toFixed(2)} </p>
+      <p>Total Shipping: ${totalShipping.toFixed(2)}</p>
+      <p>Grand Total: ${grandTotal.toFixed(2)}</p>
       <button onClick={removeCart}>Clear Cart</button>
     </div>
   );

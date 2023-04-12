@@ -1,0 +1,11 @@
+.product {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product img {
+  width: 100%;
+}

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Shop.css";
 import Product from "../Product/Product";
+import Cart from "../Cart/Cart";
+import { addToLocalStorage, removeFromCart } from "../../utilities/fakedb";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -14,7 +17,9 @@ const Shop = () => {
   }, []);
 
   const handleAddToCart = (product) => {
-    console.log(product);
+    const newCart = [...cart, product];
+    setCart(newCart);
+    addToLocalStorage(product.id);
   };
 
   return (
@@ -28,8 +33,8 @@ const Shop = () => {
           ></Product>
         ))}
       </div>
-      <div className="cart-container">
-        <h4>Order Summary</h4>
+      <div>
+        <Cart cart={cart}></Cart>
       </div>
     </div>
   );

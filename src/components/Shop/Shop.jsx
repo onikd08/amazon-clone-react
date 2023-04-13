@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./Shop.css";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
-import { addToLocalStorage, removeFromCart } from "../../utilities/fakedb";
+import {
+  addToLocalStorage,
+  getDataFromLocalStorage,
+  removeCart,
+} from "../../utilities/fakedb";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -16,10 +20,38 @@ const Shop = () => {
       .then((data) => setProducts(data));
   }, []);
 
+  useEffect(() => {
+    const storedCart = getDataFromLocalStorage();
+    const savedCart = [];
+    for (const id in storedCart) {
+      const foundProduct = products.find((product) => product.id === id);
+      if (foundProduct) {
+        const quantity = storedCart[id];
+        foundProduct.quantity = quantity;
+        savedCart.push(foundProduct);
+      }
+    }
+    setCart(savedCart);
+  }, [products]);
+
   const handleAddToCart = (product) => {
-    const newCart = [...cart, product];
+    let newCart = [];
+    const alreadyExist = cart.find((item) => product.id === item.id);
+    if (alreadyExist) {
+      const restItemsInCart = cart.filter((item) => item.id !== product.id);
+      alreadyExist.quantity += 1;
+      newCart = [...restItemsInCart, alreadyExist];
+    } else {
+      product.quantity = 1;
+      newCart = [...cart, product];
+    }
     setCart(newCart);
     addToLocalStorage(product.id);
+  };
+
+  const handleRemoveCart = () => {
+    localStorage.removeItem("shopping-cart");
+    setCart([]);
   };
 
   return (
@@ -34,7 +66,7 @@ const Shop = () => {
         ))}
       </div>
       <div>
-        <Cart cart={cart}></Cart>
+        <Cart cart={cart} handleRemoveCart={handleRemoveCart}></Cart>
       </div>
     </div>
   );

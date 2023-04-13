@@ -1,9 +1,5 @@
 export const addToLocalStorage = (id) => {
-  let storedCart = {};
-  const shoppingCart = localStorage.getItem("shopping-cart");
-  if (shoppingCart) {
-    storedCart = JSON.parse(shoppingCart);
-  }
+  const storedCart = getDataFromLocalStorage();
   const quantity = storedCart[id];
   if (quantity) {
     storedCart[id] = quantity + 1;
@@ -13,7 +9,11 @@ export const addToLocalStorage = (id) => {
   localStorage.setItem("shopping-cart", JSON.stringify(storedCart));
 };
 
-export const removeCart = () => {
-  //const storedCart = JSON.parse(localStorage.getItem("shopping-cart"));
-  localStorage.removeItem("shopping-cart");
+export const getDataFromLocalStorage = () => {
+  let storedCart = {};
+  const shoppingCart = localStorage.getItem("shopping-cart");
+  if (shoppingCart) {
+    storedCart = JSON.parse(shoppingCart);
+  }
+  return storedCart;
 };

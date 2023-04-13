@@ -3,7 +3,6 @@ import "./Cart.css";
 import calculateTotal from "../../utilities/calculateTotal";
 
 const Cart = ({ cart, handleRemoveCart }) => {
-  console.log(cart);
   const { totalQuantity, totalPrice, totalShipping, grandTotal } =
     calculateTotal(cart);
   return (

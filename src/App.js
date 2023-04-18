@@ -4,6 +4,7 @@ import Shop from "./components/Shop/Shop.jsx";
 import Orders from "./components/Orders/Orders";
 import Inventory from "./components/Inventory/Inventory";
 import About from "./components/About/About";
+import { loadProductsAndCart } from "./loaders/loadProductsAndCart";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,15 +14,12 @@ function App() {
       children: [
         {
           path: "/",
-          loader: async () => fetch("products.json"),
+          loader: loadProductsAndCart,
           element: <Shop></Shop>,
         },
         {
           path: "/orders",
-          loader: () =>
-            fetch(
-              "https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json"
-            ),
+          loader: loadProductsAndCart,
           element: <Orders></Orders>,
         },
         {

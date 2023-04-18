@@ -5,21 +5,12 @@ import Cart from "../Cart/Cart";
 import {
   addToLocalStorage,
   getDataFromLocalStorage,
-  removeCart,
 } from "../../utilities/fakedb";
 import { useLoaderData } from "react-router-dom";
 
 const Shop = () => {
-  // const [products, setProducts] = useState([]);
-  const products = useLoaderData();
+  const { products } = useLoaderData();
   const [cart, setCart] = useState([]);
-  // useEffect(() => {
-  //   fetch(
-  //     "https://raw.githubusercontent.com/ProgrammingHero1/ema-john-resources/main/fakeData/products.json"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => setProducts(data));
-  // }, []);
 
   useEffect(() => {
     const storedCart = getDataFromLocalStorage();

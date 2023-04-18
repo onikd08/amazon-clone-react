@@ -5,10 +5,11 @@
 .review-item {
   display: flex;
   border: 2px solid gray;
-  border-radius: 15px;
+  border-radius: 8px;
   padding: 8px;
   width: 571px;
-  margin: 0 auto;
+  height: 107px;
+  margin: 21px auto;
   align-items: center;
 }
 
@@ -25,7 +26,7 @@
 
 .delete-icon {
   font-size: 31px;
-  color: #e83636;
+  color: #eb5757;
 }
 
 .btn-delete {
@@ -34,4 +35,14 @@
   border-radius: 50%;
   border: 0;
   background-color: rgba(235, 87, 87, 0.3);
+}
+
+.btn-delete:hover {
+  background-color: rgba(235, 87, 87, 0.5);
+  cursor: pointer;
+}
+
+.delete-container {
+  display: flex;
+  align-items: center;
 }

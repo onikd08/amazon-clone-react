@@ -17,3 +17,11 @@ export const getDataFromLocalStorage = () => {
   }
   return storedCart;
 };
+
+export const removeItemFromLocalStorage = (itemID) => {
+  const localStorageData = getDataFromLocalStorage();
+  if (itemID in localStorageData) {
+    delete localStorageData[itemID];
+    localStorage.setItem("shopping-cart", JSON.stringify(localStorageData));
+  }
+};

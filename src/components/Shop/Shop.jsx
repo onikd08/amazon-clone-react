@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Shop.css";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
-import {
-  addToLocalStorage,
-  getDataFromLocalStorage,
-} from "../../utilities/fakedb";
+import { addToLocalStorage } from "../../utilities/fakedb";
 import { useLoaderData } from "react-router-dom";
 
 const Shop = () => {

@@ -7,15 +7,15 @@ export const loadProductsAndCart = async () => {
   const products = await data.json();
 
   const cartProducts = getDataFromLocalStorage();
-  const cart = [];
+  const initialCart = [];
   for (const id in cartProducts) {
     const targetProduct = products.find((item) => item.id === id);
 
     if (targetProduct) {
       const quantity = cartProducts[id];
       targetProduct.quantity = quantity;
-      cart.push(targetProduct);
+      initialCart.push(targetProduct);
     }
   }
-  return { products, cart };
+  return { products, initialCart };
 };

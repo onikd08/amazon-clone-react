@@ -9,22 +9,8 @@ import {
 import { useLoaderData } from "react-router-dom";
 
 const Shop = () => {
-  const { products } = useLoaderData();
-  const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    const storedCart = getDataFromLocalStorage();
-    const savedCart = [];
-    for (const id in storedCart) {
-      const foundProduct = products.find((product) => product.id === id);
-      if (foundProduct) {
-        const quantity = storedCart[id];
-        foundProduct.quantity = quantity;
-        savedCart.push(foundProduct);
-      }
-    }
-    setCart(savedCart);
-  }, [products]);
+  const { products, initialCart } = useLoaderData();
+  const [cart, setCart] = useState(initialCart);
 
   const handleAddToCart = (product) => {
     let newCart = [];

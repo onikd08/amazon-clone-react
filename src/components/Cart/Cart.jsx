@@ -2,7 +2,7 @@ import React from "react";
 import "./Cart.css";
 import calculateTotal from "../../utilities/calculateTotal";
 
-const Cart = ({ cart, handleRemoveCart }) => {
+const Cart = ({ cart, handleClearCart, children }) => {
   const { totalQuantity, totalPrice, totalShipping, grandTotal } =
     calculateTotal(cart);
   return (
@@ -12,7 +12,8 @@ const Cart = ({ cart, handleRemoveCart }) => {
       <p>Total Price: ${totalPrice.toFixed(2)} </p>
       <p>Total Shipping: ${totalShipping.toFixed(2)}</p>
       <p>Grand Total: ${grandTotal.toFixed(2)}</p>
-      <button onClick={handleRemoveCart}>Clear Cart</button>
+      {children}
+      <button onClick={handleClearCart}>Clear Cart</button>
     </div>
   );
 };

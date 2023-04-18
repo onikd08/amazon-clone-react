@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./Shop.css";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
-import { addToLocalStorage } from "../../utilities/fakedb";
-import { useLoaderData } from "react-router-dom";
+import { addToLocalStorage, removeShoppingCart } from "../../utilities/fakedb";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Shop = () => {
   const { products, initialCart } = useLoaderData();
@@ -24,8 +24,8 @@ const Shop = () => {
     addToLocalStorage(product.id);
   };
 
-  const handleRemoveCart = () => {
-    localStorage.removeItem("shopping-cart");
+  const handleClearCart = () => {
+    removeShoppingCart();
     setCart([]);
   };
 
@@ -41,7 +41,11 @@ const Shop = () => {
         ))}
       </div>
       <div>
-        <Cart cart={cart} handleRemoveCart={handleRemoveCart}></Cart>
+        <Cart cart={cart} handleClearCart={handleClearCart}>
+          <Link to="/orders">
+            <button>Review Order</button>
+          </Link>
+        </Cart>
       </div>
     </div>
   );

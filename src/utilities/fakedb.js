@@ -25,3 +25,7 @@ export const removeItemFromLocalStorage = (itemID) => {
     localStorage.setItem("shopping-cart", JSON.stringify(localStorageData));
   }
 };
+
+export const removeShoppingCart = () => {
+  localStorage.removeItem("shopping-cart");
+};

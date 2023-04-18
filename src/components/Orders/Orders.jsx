@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import ReviewItems from "../ReviewItems/ReviewItems";
-import { removeItemFromLocalStorage } from "../../utilities/fakedb";
+import {
+  removeItemFromLocalStorage,
+  removeShoppingCart,
+} from "../../utilities/fakedb";
 
 const Orders = () => {
   const { initialCart } = useLoaderData();
@@ -14,19 +17,30 @@ const Orders = () => {
     removeItemFromLocalStorage(itemID);
   };
 
+  const handleClearCart = () => {
+    removeShoppingCart();
+    setCartItems([]);
+  };
+
   return (
     <div className="shop-container">
       <div className="review-items-container">
-        {cartItems.map((product) => (
-          <ReviewItems
-            key={product.id}
-            product={product}
-            handleRemoveItem={handleRemoveItem}
-          ></ReviewItems>
-        ))}
+        {cartItems.length ? (
+          cartItems.map((product) => (
+            <ReviewItems
+              key={product.id}
+              product={product}
+              handleRemoveItem={handleRemoveItem}
+            ></ReviewItems>
+          ))
+        ) : (
+          <h3>
+            No items in cart. Want to go back to <Link to="/shop">Shop?</Link>
+          </h3>
+        )}
       </div>
       <div className="cart-container">
-        <Cart cart={cartItems}></Cart>
+        <Cart handleClearCart={handleClearCart} cart={cartItems}></Cart>
       </div>
     </div>
   );

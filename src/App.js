@@ -18,6 +18,11 @@ function App() {
           element: <Shop></Shop>,
         },
         {
+          path: "/shop",
+          loader: loadProductsAndCart,
+          element: <Shop></Shop>,
+        },
+        {
           path: "/orders",
           loader: loadProductsAndCart,
           element: <Orders></Orders>,

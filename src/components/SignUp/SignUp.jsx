@@ -1,10 +1,10 @@
 import React from "react";
-import "./Login.css";
 import { Link } from "react-router-dom";
-const Login = () => {
+
+const SignUp = () => {
   return (
     <div className="form-container">
-      <h2 className="form-title">Login</h2>
+      <h2 className="form-title">Sign Up</h2>
       <form>
         <div className="form-control">
           <label htmlFor="email">Email</label>
@@ -12,22 +12,21 @@ const Login = () => {
         </div>
         <div className="form-control">
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" required />
+          <input name="password" type="password" required />
         </div>
-        <input className="btn-submit" type="submit" value="Login" />
+        <input className="btn-submit" type="submit" value="Sign Up" />
       </form>
       <p>
         <small>
-          New to Ema-John?
-          <Link to="/signup" style={{ color: "orange" }}>
-            Create an Account
+          Already have an Account?
+          <Link to="/login" style={{ color: "orange" }}>
+            Login
           </Link>
         </small>
       </p>
-
       <button className="btn-google">Sign in with Google</button>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

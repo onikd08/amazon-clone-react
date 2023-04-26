@@ -13,12 +13,15 @@ const auth = getAuth(app);
 
 const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userIsLoading, setUserIsLoading] = useState(true);
 
   const createUser = (email, password) => {
+    setUserIsLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const loginUser = (email, password) => {
+    setUserIsLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -30,14 +33,16 @@ const UserContext = ({ children }) => {
     const observer = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
+        setUserIsLoading(false);
       } else {
         setUser(null);
+        setUserIsLoading(true);
       }
     });
     return () => observer();
   }, []);
 
-  const authInfo = { user, createUser, loginUser, logOutUser };
+  const authInfo = { user, createUser, loginUser, logOutUser, userIsLoading };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

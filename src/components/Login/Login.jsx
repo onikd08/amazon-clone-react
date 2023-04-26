@@ -10,7 +10,7 @@ const Login = () => {
   const [success, setSuccess] = useState(true);
 
   const location = useLocation();
-  let from = location.state?.from?.pathname || "";
+  let from = location.state?.from?.pathname || "/";
 
   // form submit event handler
   const handleSubmit = (e) => {

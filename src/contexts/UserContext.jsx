@@ -26,18 +26,14 @@ const UserContext = ({ children }) => {
   };
 
   const logOutUser = () => {
+    setUserIsLoading(true);
     return signOut(auth);
   };
 
   useEffect(() => {
     const observer = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setUserIsLoading(false);
-      } else {
-        setUser(null);
-        setUserIsLoading(true);
-      }
+      setUser(currentUser);
+      setUserIsLoading(false);
     });
     return () => observer();
   }, []);

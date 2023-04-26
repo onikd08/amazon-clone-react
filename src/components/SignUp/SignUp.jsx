@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+    // password validation
+    if (password !== confirm) {
+      setError("Password did not match");
+      setSuccess(false);
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password must contain at least 6 characters");
+      setSuccess(false);
+      return;
+    }
+    setSuccess(true);
+    form.reset();
+  };
+
   return (
     <div className="form-container">
-      <h2 className="form-title">Sign Up</h2>
-      <form>
+      <h2 className="form-title">Sign Up </h2>
+      <small>onikd08@gmail.com</small>
+      <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label htmlFor="email">Email</label>
           <input type="email" name="email" required />
@@ -20,6 +44,7 @@ const SignUp = () => {
         </div>
         <input className="btn-submit" type="submit" value="Sign Up" />
       </form>
+      {!success && <p style={{ color: "red" }}>{error}</p>}
       <p>
         <small>
           Already have an Account?

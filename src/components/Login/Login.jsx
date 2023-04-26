@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(true);
+
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "";
 
   // form submit event handler
   const handleSubmit = (e) => {
@@ -21,6 +24,7 @@ const Login = () => {
         const user = result.user;
         setSuccess(true);
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         setSuccess(false);

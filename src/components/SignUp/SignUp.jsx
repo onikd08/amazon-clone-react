@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/UserContext";
 
 const SignUp = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(true);
+
+  const { createUser } = useContext(AuthContext);
+
+  // form submit event handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,8 +26,16 @@ const SignUp = () => {
       setSuccess(false);
       return;
     }
-    setSuccess(true);
-    form.reset();
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        setSuccess(true);
+        form.reset();
+      })
+      .catch((error) => {
+        setSuccess(false);
+        setError(error.message);
+      });
   };
 
   return (

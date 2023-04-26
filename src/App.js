@@ -7,6 +7,7 @@ import About from "./components/About/About";
 import { loadProductsAndCart } from "./loaders/loadProductsAndCart";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -31,7 +32,11 @@ function App() {
         },
         {
           path: "/inventory",
-          element: <Inventory></Inventory>,
+          element: (
+            <PrivateRoute>
+              <Inventory />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/login",
